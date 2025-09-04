@@ -33,6 +33,16 @@ const pilotsSample = [
       "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
     photo: "/images/isaque.png",
     achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
+  },
+  {
+    id: 4,
+    name: "Fernandes, Isaac",
+    number: 12,
+    category: "Júnior",
+    bio:
+      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
+    photo: "/images/isaac.png",
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
   }
 ];
 
