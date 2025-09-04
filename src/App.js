@@ -80,8 +80,18 @@ export default function App() {
     return new Date(cur.date) > new Date() && (!acc || new Date(cur.date) < new Date(acc.date)) ? cur : acc;
   }, null);
 
-  const next = () => setCurrent((prev) => (prev + 1) % pilotsSample.length);
-  const prev = () => setCurrent((prev) => (prev - 1 + pilotsSample.length) % pilotsSample.length);
+const next = () => {
+  setCurrent((prevIndex) => (prevIndex + 1) % pilotsSample.length);
+};
+
+const prev = () => {
+  setCurrent((prevIndex) =>
+    (prevIndex - 1 + pilotsSample.length) % pilotsSample.length
+  );
+};
+
+const duplicatedPilots = [...pilotsSample, ...pilotsSample];
+
 
   // 🔥 Suporte a swipe
   const handlers = useSwipeable({
@@ -137,37 +147,39 @@ export default function App() {
           </button>
 
           {/* Carrossel */}
-          <div className="flex w-full justify-center relative h-[600px] overflow-visible">
-            {pilotsSample.map((p, index) => {
-              const offset = index - current;
-              let scale = offset === 0 ? 1 : 0.7;
-              let opacity = offset === 0 ? 1 : 0.4;
-              let zIndex = offset === 0 ? 10 : 0;
+          <div className="flex justify-center items-center h-[600px] relative">
+  {[current - 1, current, current + 1].map((i) => {
+    const p = pilotsSample[i];
+    if (!p) return null;
 
-              return (
-                <motion.div
-                  key={p.id}
-                  animate={{ scale, opacity }}
-                  transition={{ duration: 0.4 }}
-                  className="absolute flex items-center justify-center text-center"
-                  style={{ transform: `translateX(${offset * 300}px)`, zIndex }}
-                >
-                  <div className="relative w-[300px] h-[420px]">
-                    <img
-                      src={p.photo}
-                      alt={p.name}
-                      className="w-full h-full object-cover rounded-xl shadow-xl"
-                    />
-                    <div className="absolute bottom-[-12] left-0 right-0 bg-black/60 text-white p-4 rounded-b-xl">
-                      <h4 className="text-lg font-bold">{p.name}</h4>
-                      <p className="text-sm text-gray-300">#{p.number} • {p.category}</p>
-                      <p className="text-xs text-gray-200 mt-1 italic">{p.bio}</p>
-                    </div>
-                  </div>
-                </motion.div>
-              );
-            })}
+    const isActive = i === current;
+    const scale = isActive ? 1 : 0.6;
+    const opacity = isActive ? 1 : 0.4;
+    const translateY = isActive ? 0 : 20; // vizinhos levemente abaixo
+
+    return (
+      <motion.div
+        key={p.id}
+        animate={{ scale, opacity, y: translateY }}
+        transition={{ duration: 0.4 }}
+        className={`mx-[-60px] ${isActive ? 'z-10' : 'z-0'}`}
+      >
+        <div className="w-[300px] h-[420px] relative">
+          <img
+            src={p.photo}
+            alt={p.name}
+            className="w-full h-full object-cover rounded-xl shadow-xl"
+          />
+          <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 rounded-b-xl">
+            <h4 className="text-lg font-bold">{p.name}</h4>
+            <p className="text-sm text-gray-300">#{p.number} • {p.category}</p>
+            <p className="text-xs text-gray-200 mt-1 italic">{p.bio}</p>
           </div>
+        </div>
+      </motion.div>
+    );
+  })}
+</div>
 
           {/* Botão próximo */}
           <button
