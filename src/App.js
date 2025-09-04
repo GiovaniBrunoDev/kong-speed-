@@ -12,18 +12,24 @@ const pilotsSample = [
     bio:
       "Piloto líder da Kong Speed. Estilo agressivo nas curvas, 3x campeão estadual e paixão por setup de chassis.",
     photo: "/images/bruno.png",
-    achievements: ["3x Campeão Estadual", "5x Pódio Nacional"]
+    achievements: ["3x Campeão Estadual", "5x Pódio Nacional"],
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br" 
   },
   {
-    id: 2,
-    name: "Pastrano, Vander",
-    number: 12,
-    category: "Júnior",
-    bio:
-      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-    photo: "/images/vander.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
-  },
+  id: 2,
+  name: "Pastrano, Vander",
+  number: 12,
+  category: "Júnior",
+  bio: "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
+  photo: "/images/vander.png",
+  achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
+  country: "Venezuela",
+  flag: "🇻🇪",         // Para emoji
+  countryCode: "ve"    // Para usar SVG no flagcdn
+}
+,
   {
     id: 3,
     name: "De Souza, Isaque",
@@ -32,7 +38,10 @@ const pilotsSample = [
     bio:
       "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
     photo: "/images/isaque.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br" 
   },
   {
     id: 4,
@@ -42,7 +51,10 @@ const pilotsSample = [
     bio:
       "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
     photo: "/images/isaac.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br" 
   },
   {
     id: 5,
@@ -52,9 +64,11 @@ const pilotsSample = [
     bio:
       "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
     photo: "/images/giovani.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
-  }
-  ,
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br" 
+  },
   {
     id: 6,
     name: "Felipe, Luiz",
@@ -62,10 +76,14 @@ const pilotsSample = [
     category: "Júnior",
     bio:
       "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-    photo: "/images/giovani.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
+    photo: "/images/luiz.png",
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br" 
   }
 ];
+
 
 const calendarSample = [
   { id: 1, date: "2025-09-20", event: "Etapa 1 - Autódromo XYZ", location: "São Paulo" },
@@ -218,13 +236,32 @@ export default function App() {
                     {/* Card de informações só no principal, com z mais alto */}
                     {isActive && (
                       <div className="absolute bottom-0 left-0 right-0 z-30 bg-black/70 text-white p-4 rounded-b-xl">
-                        <h4 className="text-lg font-bold">{p.name}</h4>
+                        <div className="flex items-center justify-between">
+                          <h4 className="text-lg font-bold">{p.name}</h4>
+
+                          {/* Bandeira + País */}
+                          <div className="flex items-center gap-1 text-sm">
+                            {/* Se quiser emoji direto: */}
+                            
+                            <span>{p.country}</span>
+
+                            {/* OU se preferir bandeira real via SVG: */}
+                             <img
+          src={`https://flagcdn.com/w20/${p.countryCode}.png`}
+          alt={p.country}
+          className="w-5 h-4 object-cover rounded-sm shadow-sm"
+        /> 
+                          </div>
+                        </div>
+
                         <p className="text-sm text-gray-300">
                           #{p.number} • {p.category}
                         </p>
                         <p className="text-xs text-gray-200 mt-1 italic">{p.bio}</p>
                       </div>
                     )}
+
+
                   </div>
                 </motion.div>
 
