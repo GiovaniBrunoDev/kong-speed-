@@ -80,17 +80,17 @@ export default function App() {
     return new Date(cur.date) > new Date() && (!acc || new Date(cur.date) < new Date(acc.date)) ? cur : acc;
   }, null);
 
-const next = () => {
-  setCurrent((prevIndex) => (prevIndex + 1) % pilotsSample.length);
-};
+  const next = () => {
+    setCurrent((prevIndex) => (prevIndex + 1) % pilotsSample.length);
+  };
 
-const prev = () => {
-  setCurrent((prevIndex) =>
-    (prevIndex - 1 + pilotsSample.length) % pilotsSample.length
-  );
-};
+  const prev = () => {
+    setCurrent((prevIndex) =>
+      (prevIndex - 1 + pilotsSample.length) % pilotsSample.length
+    );
+  };
 
-const duplicatedPilots = [...pilotsSample, ...pilotsSample];
+  const duplicatedPilots = [...pilotsSample, ...pilotsSample];
 
 
   // 🔥 Suporte a swipe
@@ -141,50 +141,75 @@ const duplicatedPilots = [...pilotsSample, ...pilotsSample];
           {/* Botão anterior */}
           <button
             onClick={prev}
-            className="absolute left-0 z-10 bg-black/50 p-2 rounded-full hover:bg-black/70"
+            className="absolute left-0 z-40 bg-black/50 p-2 rounded-full hover:bg-black/70"
           >
             <ChevronLeft className="text-white" size={28} />
           </button>
 
           {/* Carrossel */}
-          <div className="flex justify-center items-center h-[600px] relative">
-  {[current - 1, current, current + 1].map((i) => {
-    const p = pilotsSample[i];
-    if (!p) return null;
+          <div className="relative flex justify-center items-center h-[600px]">
+            {[-1, 0, 1].map((offset) => {
+              const index = (current + offset + pilotsSample.length) % pilotsSample.length;
+              const p = pilotsSample[index];
+              const isActive = offset === 0;
 
-    const isActive = i === current;
-    const scale = isActive ? 1 : 0.6;
-    const opacity = isActive ? 1 : 0.4;
-    const translateY = isActive ? 0 : 20; // vizinhos levemente abaixo
+              const scale = isActive ? 1.1 : 0.75; // principal maior
+              const opacity = isActive ? 1 : 0.5;
+              const translateY = isActive ? 0 : 30;
+              const xOffset = offset * 160; // vizinhos próximos
 
-    return (
-      <motion.div
-        key={p.id}
-        animate={{ scale, opacity, y: translateY }}
-        transition={{ duration: 0.4 }}
-        className={`mx-[-60px] ${isActive ? 'z-10' : 'z-0'}`}
-      >
-        <div className="w-[300px] h-[420px] relative">
-          <img
-            src={p.photo}
-            alt={p.name}
-            className="w-full h-full object-cover rounded-xl shadow-xl"
-          />
-          <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-4 rounded-b-xl">
-            <h4 className="text-lg font-bold">{p.name}</h4>
-            <p className="text-sm text-gray-300">#{p.number} • {p.category}</p>
-            <p className="text-xs text-gray-200 mt-1 italic">{p.bio}</p>
+              return (
+                <motion.div
+                  key={p.id}
+                  animate={{
+                    scale,
+                    opacity,
+                    y: translateY,
+                    x: isActive ? "-50%" : `calc(-50% + ${xOffset}px)`,
+                  }}
+                  transition={{
+                    type: "spring",
+                    stiffness: 120,
+                    damping: 18,
+                  }}
+                  className={`absolute left-1/2 ${isActive ? "z-20" : "z-10"}`}
+                >
+                  <div
+                    className={`${isActive ? "w-[320px]" : "w-[220px]"} h-[420px] relative`}
+                  >
+                    <img
+                      src={p.photo}
+                      alt={p.name}
+                      className="w-full h-full object-cover rounded-xl shadow-xl"
+                    />
+
+                    {/* Card de informações só no principal, com z mais alto */}
+                    {isActive && (
+                      <div className="absolute bottom-0 left-0 right-0 z-30 bg-black/70 text-white p-4 rounded-b-xl">
+                        <h4 className="text-lg font-bold">{p.name}</h4>
+                        <p className="text-sm text-gray-300">
+                          #{p.number} • {p.category}
+                        </p>
+                        <p className="text-xs text-gray-200 mt-1 italic">{p.bio}</p>
+                      </div>
+                    )}
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
-        </div>
-      </motion.div>
-    );
-  })}
-</div>
+
+
+
+
+
+
+
 
           {/* Botão próximo */}
           <button
             onClick={next}
-            className="absolute right-0 z-10 bg-black/50 p-2 rounded-full hover:bg-black/70"
+            className="absolute right-0 z-40 bg-black/50 p-2 rounded-full hover:bg-black/70"
           >
             <ChevronRight className="text-white" size={28} />
           </button>
