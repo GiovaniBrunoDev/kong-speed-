@@ -43,6 +43,16 @@ const pilotsSample = [
       "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
     photo: "/images/isaac.png",
     achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
+  },
+  {
+    id: 5,
+    name: "Bruno, Giovani",
+    number: 12,
+    category: "Júnior",
+    bio:
+      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
+    photo: "/images/giovani.png",
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
   }
 ];
 
@@ -157,7 +167,8 @@ export default function App() {
           </button>
 
           {/* Carrossel */}
-          <div className="relative flex justify-center items-center h-[600px]">
+          <div className="relative flex justify-center items-center min-h-[600px]">
+
             {[-1, 0, 1].map((offset) => {
               const index = (current + offset + pilotsSample.length) % pilotsSample.length;
               const p = pilotsSample[index];
@@ -185,12 +196,12 @@ export default function App() {
                   className={`absolute left-1/2 ${isActive ? "z-20" : "z-10"}`}
                 >
                   <div
-                    className={`${isActive ? "w-[320px]" : "w-[220px]"} h-[420px] relative`}
+                    className={`${isActive ? "w-[340px]" : "w-[220px]"} relative`}
                   >
                     <img
                       src={p.photo}
                       alt={p.name}
-                      className="w-full h-full object-cover rounded-xl shadow-xl"
+                      className="w-full h-auto object-cover rounded-xl shadow-xl"
                     />
 
                     {/* Card de informações só no principal, com z mais alto */}
@@ -205,18 +216,12 @@ export default function App() {
                     )}
                   </div>
                 </motion.div>
+
               );
             })}
           </div>
 
-
-
-
-
-
-
-
-          {/* Botão próximo */}
+         {/* Botão próximo */}
           <button
             onClick={next}
             className="absolute right-0 z-40 bg-black/50 p-2 rounded-full hover:bg-black/70"
