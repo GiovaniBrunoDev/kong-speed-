@@ -153,11 +153,11 @@ export default function App() {
       </section>
 
       {/* PILOTS - Carrossel estilo videogame */}
-      <section id="pilots" className="max-w-7xl mx-auto px-6 py-12">
-        <h3 className="text-3xl font-bold text-center">Pilotos & Staff</h3>
-        <p className="text-gray-300 mt-2 text-center">Conheça o time que faz a Kong Speed acelerar.</p>
+      <section id="pilots" className="max-w-7xl mx-auto px-6 py-8">
+        <h3 className="text-3xl font-bold text-center">Pilotos</h3>
+        <p className="text-gray-300 mt-1 text-center">Conheça o time que faz a KongSpeed acelerar.</p>
 
-        <div className="relative mt-10 flex items-center justify-center" {...handlers}>
+        <div className="relative mt-6 flex items-center justify-center" {...handlers}>
           {/* Botão anterior */}
           <button
             onClick={prev}
@@ -221,7 +221,7 @@ export default function App() {
             })}
           </div>
 
-         {/* Botão próximo */}
+          {/* Botão próximo */}
           <button
             onClick={next}
             className="absolute right-0 z-40 bg-black/50 p-2 rounded-full hover:bg-black/70"
@@ -232,10 +232,10 @@ export default function App() {
       </section>
 
       {/* AGENDA */}
-      <section id="agenda" className="bg-gradient-to-b from-black/60 to-transparent py-12">
+      <section id="agenda" className="bg-gradient-to-b from-black/60 to-transparent py-8">
         <div className="max-w-7xl mx-auto px-6">
           <h3 className="text-3xl font-bold">Agenda</h3>
-          <p className="text-gray-300 mt-2">Calendário oficial de corridas e eventos da Kong Speed.</p>
+          <p className="text-gray-300 mt-1">Calendário oficial de corridas e eventos da Kong Speed.</p>
 
           <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="bg-gray-900 p-4 rounded-lg">
