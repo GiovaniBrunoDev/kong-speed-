@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+html, body {
+  overflow-x: hidden;
+  overscroll-behavior-x: none; /* evita “bounce” lateral no iOS/Android */
+  max-width: 100vw;
+}
+
