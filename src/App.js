@@ -54,6 +54,17 @@ const pilotsSample = [
     photo: "/images/giovani.png",
     achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
   }
+  ,
+  {
+    id: 6,
+    name: "Felipe, Luiz",
+    number: 12,
+    category: "Júnior",
+    bio:
+      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
+    photo: "/images/giovani.png",
+    achievements: ["Campeã Regional Júnior", "Rookie do Ano"]
+  }
 ];
 
 const calendarSample = [
