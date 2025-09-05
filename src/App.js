@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwipeable } from "react-swipeable"; // 🔥 adicionado
 
+
 const pilotsSample = [
   {
     id: 1,
@@ -92,7 +93,6 @@ const pilotsSample = [
 
 
 
-
 const calendarSample = [
   { 
     id: 1, 
@@ -116,14 +116,30 @@ const calendarSample = [
 
 
 const gallerySample = [
-  "/assets/gallery/1.jpg",
-  "/assets/gallery/2.jpg",
-  "/assets/gallery/3.jpg"
+  "/assets/gallery/1.png",
+  "/assets/gallery/2.png",
+  "/assets/gallery/3.png",
+  "/assets/gallery/4.png",
+  "/assets/gallery/5.png",
+  "/assets/gallery/6.png",
+  "/assets/gallery/7.png",
+  "/assets/gallery/8.png"
 ];
 
 const newsSample = [
-  { id: 1, title: "Treino intensivo antes da etapa 1", date: "2025-08-30", excerpt: "A equipe realizou sessões de acerto..." },
-  { id: 2, title: "Patrocínio confirmado: FastFuel", date: "2025-07-12", excerpt: "Novo parceiro para a temporada 2025/26." }
+  {
+    id: 1,
+    title: "Rumores indicam possível retorno à temporada 2025",
+    date: "2025-09-02",
+    excerpt: "Fontes próximas à equipe sugerem que negociações estão em andamento para um retorno ainda nesta temporada."
+  },
+  {
+  id: 2,
+  title: "Pilotos iniciam pré-temporada com foco total na performance",
+  date: "2025-09-04",
+  excerpt: "Com treinos físicos, testes de simulador e sessões no novo Autódromo das Cataratas, os pilotos iniciam a preparação visando a etapa inaugural da temporada 2025/26."
+}
+
 ];
 
 function formatDateVerbose(iso) {
@@ -173,6 +189,7 @@ export default function App() {
     trackMouse: true
   });
 
+  
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-800 text-white font-sans overflow-x-hidden max-w-[100vw]">
       {/* HEADER */}
@@ -204,6 +221,7 @@ export default function App() {
           </a>
         </div>
       </section>
+
 
       {/* PILOTS - Carrossel estilo videogame */}
       <section id="pilots" className="max-w-7xl mx-auto px-6 py-8">
@@ -302,11 +320,11 @@ export default function App() {
         </div>
       </section>
 
-      {/* AGENDA */}
+      
 {/* AGENDA */}
 <section id="agenda" className="relative bg-gradient-to-b from-black via-gray-900/80 to-transparent py-12">
   <div className="max-w-7xl mx-auto px-6 relative z-10">
-    <h3 className="text-3xl md:text-4xl font-bold text-white">📅 Agenda</h3>
+    <h3 className="text-3xl md:text-4xl font-bold text-white">Agenda</h3>
     <p className="text-gray-400 mt-1">Calendário oficial de corridas e eventos da Kong Speed.</p>
 
     <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -432,7 +450,6 @@ export default function App() {
                 <div className="text-sm text-gray-400">{formatDateVerbose(n.date)}</div>
                 <h4 className="mt-2 font-bold">{n.title}</h4>
                 <p className="mt-2 text-gray-300 text-sm">{n.excerpt}</p>
-                <a className="mt-4 inline-block text-red-500 underline text-sm" href="#">Leia mais</a>
               </article>
             ))}
           </div>
@@ -444,12 +461,9 @@ export default function App() {
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-gray-900 p-6 rounded-lg">
             <h4 className="font-bold text-2xl">Patrocínios & Parcerias</h4>
-            <p className="mt-2 text-gray-300">Interessado em apoiar a Kong Speed? Envie uma proposta ou solicite o nosso kit de mídia.</p>
+            <p className="mt-2 text-gray-300">Interessado em apoiar a Kong Speed? Envie uma proposta.</p>
             <div className="mt-4 flex gap-3 flex-wrap">
-              {/* Placeholder sponsor logos */}
-              <div className="px-3 py-2 bg-white/5 rounded">FastFuel</div>
-              <div className="px-3 py-2 bg-white/5 rounded">GripTech</div>
-              <div className="px-3 py-2 bg-white/5 rounded">ProTires</div>
+             
             </div>
           </div>
 
