@@ -6,90 +6,114 @@ import { useSwipeable } from "react-swipeable"; // 🔥 adicionado
 const pilotsSample = [
   {
     id: 1,
-    name: "Bressiane, Bruno",
-    number: 7,
-    category: "Sênior",
-    bio:
-      "Piloto líder da Kong Speed. Estilo agressivo nas curvas, 3x campeão estadual e paixão por setup de chassis.",
-    photo: "/images/bruno.png",
-    achievements: ["3x Campeão Estadual", "5x Pódio Nacional"],
-    country: "Brasil",
-    flag: "🇧🇷",
-    countryCode: "br" 
+    name: "Pastrano, Vander",
+    number: 12,
+    category: "Júnior",
+    country: "Venezuela",
+    flag: "🇻🇪",
+    countryCode: "ve",
+    bio: "Prodígio da equipe. Mesmo sem correr todas as etapas de 2024, brilhou nas provas em que participou e conquistou uma vitória marcante.",
+    photo: "/images/vander.png",
+    achievements: ["Piloto Prodígio"]
   },
   {
-  id: 2,
-  name: "Pastrano, Vander",
-  number: 12,
-  category: "Júnior",
-  bio: "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-  photo: "/images/vander.png",
-  achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
-  country: "Venezuela",
-  flag: "🇻🇪",         // Para emoji
-  countryCode: "ve"    // Para usar SVG no flagcdn
-}
-,
+    id: 2,
+    name: "Bressiani, Bruno",
+    number: 7,
+    category: "Sênior",
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br",
+    bio: "Figura constante no pelotão da frente, já protagonizou algumas das disputas mais emocionantes do grid, tornando-se referência em velocidade.",
+    photo: "/images/bruno.png",
+    achievements: ["3º Lugar 2024"]
+  },
   {
     id: 3,
     name: "De Souza, Isaque",
-    number: 12,
+    number: 21,
     category: "Júnior",
-    bio:
-      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-    photo: "/images/isaque.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
     country: "Brasil",
     flag: "🇧🇷",
-    countryCode: "br" 
+    countryCode: "br",
+    bio: "Vice-campeão em 2024, se destaca pelas ultrapassagens agressivas e ritmo constante. Especialista em corridas na chuva, onde demonstra controle e confiança impressionantes.",
+    photo: "/images/isaque.png",
+    achievements: ["Vice-campeão 2024"]
   },
   {
     id: 4,
-    name: "Fernandes, Isaac",
-    number: 12,
+    name: "Bruno, Giovani",
+    number: 9,
     category: "Júnior",
-    bio:
-      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-    photo: "/images/isaac.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
     country: "Brasil",
     flag: "🇧🇷",
-    countryCode: "br" 
+    countryCode: "br",
+    bio: "Campeão da temporada 2024, mostrou consistência e velocidade em todas as etapas, consolidando-se como referência da equipe.",
+    photo: "/images/giovani.png",
+    achievements: ["Campeão 2024"]
   },
   {
     id: 5,
-    name: "Bruno, Giovani",
-    number: 12,
+    name: "Felipe, Luiz",
+    number: 15,
     category: "Júnior",
-    bio:
-      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-    photo: "/images/giovani.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
     country: "Brasil",
     flag: "🇧🇷",
-    countryCode: "br" 
+    countryCode: "br",
+    bio: "Entrou no meio da temporada passada e rapidamente se destacou. Seu estilo arrojado e capacidade de adaptação chamam atenção.",
+    photo: "/images/luiz.png",
+    achievements: ["Melhor Estreante 2024"]
   },
   {
     id: 6,
-    name: "Felipe, Luiz",
-    number: 12,
+    name: "Fernandes, Isaac",
+    number: 33,
     category: "Júnior",
-    bio:
-      "Jovem promessa da equipe; técnica impecável e faro para ultrapassagens decisivas.",
-    photo: "/images/luiz.png",
-    achievements: ["Campeã Regional Júnior", "Rookie do Ano"],
     country: "Brasil",
     flag: "🇧🇷",
-    countryCode: "br" 
+    countryCode: "br",
+    bio: "Mostrou grande evolução ao longo de 2024 e chega cada vez mais competitivo. Determinado, não desiste facilmente em pista.",
+    photo: "/images/isaac.png",
+    achievements: ["Piloto Revelação 2024"]
+  },
+  {
+    id: 7,
+    name: "Tiago",
+    number: 99,
+    category: "Rookie",
+    country: "Brasil",
+    flag: "🇧🇷",
+    countryCode: "br",
+    bio: "Estreante em 2025, chega cheio de motivação e dedicação. Promete aprendizado rápido e foco em evolução constante.",
+    photo: "/images/tiago.png",
+    achievements: ["Estreia 2025"]
   }
 ];
 
 
+
+
 const calendarSample = [
-  { id: 1, date: "2025-09-20", event: "Etapa 1 - Autódromo XYZ", location: "São Paulo" },
-  { id: 2, date: "2025-10-11", event: "Etapa 2 - Circuito ABC", location: "Rio de Janeiro" },
-  { id: 3, date: "2025-11-02", event: "Copa Nacional - Final", location: "Curitiba" }
+  { 
+    id: 1, 
+    date: "A definir", 
+    event: "Etapa 1 - Adrena Kart Kartódromo", 
+    location: "Foz do Iguaçu" 
+  },
+  { 
+    id: 2, 
+    date: "A definir", 
+    event: "Etapa 2 - Adrena Kart Kartódromo", 
+    location: "Foz do Iguaçu" 
+  },
+  { 
+    id: 3, 
+    date: "A definir", 
+    event: "Copa Nacional - Final", 
+    location: "Foz do Iguaçu" 
+  }
 ];
+
 
 const gallerySample = [
   "/assets/gallery/1.jpg",
@@ -241,25 +265,24 @@ export default function App() {
 
                           {/* Bandeira + País */}
                           <div className="flex items-center gap-1 text-sm">
-                            {/* Se quiser emoji direto: */}
-                            
                             <span>{p.country}</span>
-
-                            {/* OU se preferir bandeira real via SVG: */}
-                             <img
-          src={`https://flagcdn.com/w20/${p.countryCode}.png`}
-          alt={p.country}
-          className="w-5 h-4 object-cover rounded-sm shadow-sm"
-        /> 
+                            <img
+                              src={`https://flagcdn.com/w20/${p.countryCode}.png`}
+                              alt={p.country}
+                              className="w-5 h-4 object-cover rounded-sm shadow-sm"
+                            />
                           </div>
                         </div>
 
-                        <p className="text-sm text-gray-300">
-                          #{p.number} • {p.category}
+                        {/* Troquei categoria/número por Achievements */}
+                        <p className="text-sm text-yellow-400 font-semibold mt-1">
+                          🏆 {p.achievements}
                         </p>
+
                         <p className="text-xs text-gray-200 mt-1 italic">{p.bio}</p>
                       </div>
                     )}
+
 
 
                   </div>
@@ -280,46 +303,102 @@ export default function App() {
       </section>
 
       {/* AGENDA */}
-      <section id="agenda" className="bg-gradient-to-b from-black/60 to-transparent py-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-3xl font-bold">Agenda</h3>
-          <p className="text-gray-300 mt-1">Calendário oficial de corridas e eventos da Kong Speed.</p>
+{/* AGENDA */}
+<section id="agenda" className="relative bg-gradient-to-b from-black via-gray-900/80 to-transparent py-12">
+  <div className="max-w-7xl mx-auto px-6 relative z-10">
+    <h3 className="text-3xl md:text-4xl font-bold text-white">📅 Agenda</h3>
+    <p className="text-gray-400 mt-1">Calendário oficial de corridas e eventos da Kong Speed.</p>
 
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-gray-900 p-4 rounded-lg">
-              <h4 className="font-bold">Próximos eventos</h4>
-              <ul className="mt-4 space-y-3 text-gray-300">
-                {calendarSample.map((ev) => (
-                  <li key={ev.id} className="flex items-center justify-between bg-black/30 p-3 rounded">
-                    <div>
-                      <div className="font-semibold">{ev.event}</div>
-                      <div className="text-sm text-gray-400">{formatDateVerbose(ev.date)} • {ev.location}</div>
-                    </div>
-                    <div className="flex flex-col items-end">
-                      <div className="text-sm">{daysUntil(ev.date)} dias</div>
-                      <a className="text-xs mt-1 underline" href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.event)}&dates=${ev.date.replace(/-/g, '')}/${ev.date.replace(/-/g, '')}&details=${encodeURIComponent(ev.event)}&location=${encodeURIComponent(ev.location)}`} target="_blank" rel="noreferrer">Adicionar</a>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
+    <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+      {/* Próximos eventos */}
+      <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-6 shadow-lg border border-gray-800 relative overflow-hidden">
+        <h4 className="font-semibold text-xl text-white flex items-center gap-2">
+          🏁 Próximos eventos
+        </h4>
 
-            <div className="bg-gray-900 p-4 rounded-lg">
-              <h4 className="font-bold">Contagem regressiva</h4>
-              <div className="mt-4 text-gray-300">
-                {nextEvent ? (
-                  <div>
-                    <div className="text-sm">Próxima corrida:</div>
-                    <div className="font-bold text-2xl">{nextEvent.event}</div>
-                    <div className="mt-2">{formatDateVerbose(nextEvent.date)}</div>
-                    <div className="mt-3 text-3xl">{daysUntil(nextEvent.date)} dias</div>
+  {/* Banner da pista entre o título e a lista */}
+  <div className="relative mt-3 mb-4 rounded-lg overflow-hidden">
+    <img
+      src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/7f/78/8e/pista-ao-ar-livre-com.jpg?w=1200&h=1200&s=1"
+      alt="Pista de Foz do Iguaçu"
+      className="w-full h-40 object-cover opacity-70"
+    />
+    {/* Gradiente mais forte para não brigar com o texto */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+  </div>
+        <ul className="mt-5 space-y-4 relative z-10">
+          {calendarSample.map((ev) => {
+            const isDefined = ev.date !== "A definir";
+            return (
+              <li
+                key={ev.id}
+                className="flex items-center justify-between bg-gray-800/40 hover:bg-gray-800/60 transition rounded-lg p-4"
+              >
+                <div>
+                  <div className="font-semibold text-white">{ev.event}</div>
+                  <div className="text-sm text-gray-400">
+                    {isDefined ? formatDateVerbose(ev.date) : "Data a definir"} • {ev.location}
                   </div>
-                ) : <div>Nenhum evento agendado.</div>}
+                </div>
+
+                <div className="flex flex-col items-end">
+                  <div className="text-sm text-gray-300 font-medium">
+                    {isDefined ? `${daysUntil(ev.date)} dias` : "Em breve"}
+                  </div>
+                  {isDefined && (
+                    <a
+                      className="text-xs mt-1 underline text-blue-400 hover:text-blue-300"
+                      href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
+                        ev.event
+                      )}&dates=${ev.date.replace(/-/g, "")}/${ev.date.replace(
+                        /-/g,
+                        ""
+                      )}&details=${encodeURIComponent(
+                        ev.event
+                      )}&location=${encodeURIComponent(ev.location)}`}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      Adicionar
+                    </a>
+                  )}
+                </div>
+              </li>
+            );
+          })}
+        </ul>
+
+      </div>
+
+      
+
+      {/* Contagem regressiva */}
+      <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-6 shadow-lg border border-gray-800">
+        <h4 className="font-semibold text-xl text-white flex items-center gap-2">
+          ⏳ Contagem regressiva
+        </h4>
+        <div className="mt-6 text-gray-300">
+          {nextEvent ? (
+            <div className="text-center">
+              <div className="text-sm uppercase tracking-wide">Próxima corrida</div>
+              <div className="font-bold text-2xl text-yellow-400">{nextEvent.event}</div>
+              <div className="mt-2 text-gray-400">
+                {nextEvent.date !== "A definir" ? formatDateVerbose(nextEvent.date) : "Data a definir"}
+              </div>
+              <div className="mt-4 text-4xl font-extrabold text-green-400">
+                {nextEvent.date !== "A definir" ? `${daysUntil(nextEvent.date)} dias` : "Em breve"}
               </div>
             </div>
-          </div>
+          ) : (
+            <div className="text-center text-gray-500">Nenhum evento agendado.</div>
+          )}
         </div>
-      </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+
 
       {/* GALLERY */}
       <section id="gallery" className="max-w-7xl mx-auto px-6 py-12">
