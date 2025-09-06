@@ -37,7 +37,7 @@ const pilotsSample = [
     country: "Brasil",
     flag: "🇧🇷",
     countryCode: "br",
-    bio: "Vice-campeão em 2024, se destaca pelas ultrapassagens agressivas e ritmo constante. Especialista em corridas na chuva, onde demonstra controle e confiança impressionantes.",
+    bio: "Vice-campeão em 2024, se destaca pelas ultrapassagens agressivas e ritmo constante. Destaque em corridas na chuva.",
     photo: "/images/isaque.png",
     achievements: ["Vice-campeão 2024"]
   },
