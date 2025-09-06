@@ -233,10 +233,10 @@ export default function App() {
           <img
             src="/images/boxe.png"
             alt="Fundo Pilotos"
-            className="w-full h-full object-cover opacity-20"
+            className="w-full h-full object-cover opacity-30"
           />
           {/* Overlay preto para escurecer */}
-          <div className="absolute inset-0 bg-black/30" />
+          <div className="absolute inset-0 bg-black/40" />
         </div>
 
 
@@ -306,7 +306,6 @@ export default function App() {
                           </div>
                         </div>
 
-                        <p className="text-sm text-yellow-400 mt-2">🏆 {p.achievements}</p>
                         <p className="text-xs text-gray-300 mt-1 line-clamp-3">{p.bio}</p>
                       </div>
                     )}
