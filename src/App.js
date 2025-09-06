@@ -198,31 +198,60 @@ export default function App() {
         </div>
       </header>
 
-      {/* HERO */}
-      <section
-        className="relative h-[90vh] md:h-screen flex items-end justify-center bg-cover bg-center"
-        style={{ backgroundImage: "url('/images/kongspeed-banner.png')" }}
+{/* HERO */}
+<section
+  className="relative h-[90vh] md:h-screen flex flex-col items-center justify-end bg-cover bg-center"
+  style={{ backgroundImage: "url('/images/kongspeed-banner.png')" }}
+>
+  <div className="relative z-10 text-center text-white p-4 pb-12 md:pb-16">
+   
+    <div className="flex items-center justify-center gap-4">
+      <a
+        href="#pilots"
+        className="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-base font-semibold transition transform hover:-translate-y-1 hover:shadow-lg"
       >
-        <div className="relative z-10 text-center text-white p-4 pb-12 md:pb-50">
-          <p className="text-lg md:text-2xl mb-4">Mais que pilotos, somos família nas pistas.</p>
-          <a
-            href="#pilots"
-            className="inline-block px-5 py-2 md:px-6 md:py-3 bg-red-600 hover:bg-red-700 rounded-full text-base md:text-lg font-semibold transition"
-          >
-            Conheça os Pilotos
-          </a>
-        </div>
-      </section>
+        Conheça os Pilotos
+      </a>
+
+      <a
+        href="#agenda"
+        className="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-full text-base font-semibold transition transform hover:-translate-y-1 hover:shadow-lg"
+      >
+        Eventos
+      </a>
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* PILOTS - Carrossel estilo videogame */}
       <section id="pilots" className="relative max-w-7xl mx-auto px-6 py-8">
+        {/* Fundo da seção */}
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/images/boxe.png"
+            alt="Fundo Pilotos"
+            className="w-full h-full object-cover opacity-20"
+          />
+          {/* Overlay preto para escurecer */}
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+
         {/* Gradiente no topo mais suave */}
         <div className="absolute top-0 left-0 w-full h-16 bg-gradient-to-b from-black/60 to-transparent pointer-events-none z-10" />
 
+        {/* Título e subtítulo */}
         <h3 className="text-3xl md:text-4xl font-extrabold text-center text-white relative z-20">
-          Nossa Equipe de Pilotos
+          Pilotos
         </h3>
+        <p className="text-gray-300 mt-2 text-center relative z-20">
+          Conheça nossa equipe
+        </p>
 
+        {/* Carrossel */}
         <div className="relative mt-6 flex items-center justify-center" {...handlers}>
           {/* Botão anterior */}
           <button
@@ -234,16 +263,15 @@ export default function App() {
 
           {/* Carrossel */}
           <div className="relative flex justify-center items-center min-h-[600px]">
-
             {[-1, 0, 1].map((offset) => {
               const index = (current + offset + pilotsSample.length) % pilotsSample.length;
               const p = pilotsSample[index];
               const isActive = offset === 0;
 
-              const scale = isActive ? 1.1 : 0.75; // principal maior
+              const scale = isActive ? 1.1 : 0.75;
               const opacity = isActive ? 1 : 0.5;
               const translateY = isActive ? 0 : 30;
-              const xOffset = offset * 160; // vizinhos próximos
+              const xOffset = offset * 160;
 
               return (
                 <motion.div
@@ -254,16 +282,10 @@ export default function App() {
                     y: translateY,
                     x: isActive ? "-50%" : `calc(-50% + ${xOffset}px)`,
                   }}
-                  transition={{
-                    type: "spring",
-                    stiffness: 120,
-                    damping: 18,
-                  }}
+                  transition={{ type: "spring", stiffness: 120, damping: 18 }}
                   className={`absolute left-1/2 ${isActive ? "z-20" : "z-10"}`}
                 >
-                  <div
-                    className={`${isActive ? "w-[340px]" : "w-[220px]"} relative`}
-                  >
+                  <div className={`${isActive ? "w-[340px]" : "w-[220px]"} relative`}>
                     <img
                       src={p.photo}
                       alt={p.name}
@@ -285,16 +307,11 @@ export default function App() {
                         </div>
 
                         <p className="text-sm text-yellow-400 mt-2">🏆 {p.achievements}</p>
-
                         <p className="text-xs text-gray-300 mt-1 line-clamp-3">{p.bio}</p>
                       </div>
                     )}
-
-
-
                   </div>
                 </motion.div>
-
               );
             })}
           </div>
@@ -309,7 +326,7 @@ export default function App() {
         </div>
       </section>
 
-   
+
       {/* CLASSIFICAÇÃO */}
       <section id="ranking" className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
         <motion.div
@@ -343,25 +360,25 @@ export default function App() {
                     transition={{ delay: index * 0.1 }}
                     className="bg-gray-800/40 hover:bg-gray-800/70 transition rounded-lg text-sm sm:text-base"
                   >
+                    {/* Posição */}
                     <td className="px-3 sm:px-4 py-3 font-bold text-gray-200">{index + 1}º</td>
-                    <td className="px-3 sm:px-4 py-3 font-medium">{p.name}</td>
-                    <td className="px-3 sm:px-4 py-3 hidden sm:table-cell">
-                      <div className="flex items-center gap-2 text-xs sm:text-sm">
-                        <img
-                          src={`https://flagcdn.com/w20/${p.countryCode}.png`}
-                          alt={p.country}
-                          className="w-5 h-4 object-cover rounded-sm shadow-sm"
-                        />
-                        {p.country}
-                      </div>
-                    </td>
-                    <td className="px-3 sm:px-4 py-3 text-right font-semibold text-yellow-400">0</td>
-                    <td className="px-3 sm:px-4 py-3 text-center">
 
+                    {/* Piloto + bandeira */}
+                    <td className="px-3 sm:px-4 py-3 font-medium flex items-center gap-2">
+                      <img
+                        src={`https://flagcdn.com/w20/${p.countryCode}.png`}
+                        alt={p.country}
+                        className="w-5 h-4 object-cover rounded-sm shadow-sm"
+                      />
+                      <span>{p.name}</span>
                     </td>
+
+                    {/* Pontos */}
+                    <td className="px-3 sm:px-4 py-3 text-right font-semibold text-yellow-400">0</td>
                   </motion.tr>
                 ))}
               </tbody>
+
             </table>
           </div>
         </motion.div>
@@ -567,7 +584,7 @@ export default function App() {
                 <div className="text-xs text-gray-400">{formatDateVerbose(n.date)}</div>
                 <h4 className="mt-1 font-semibold text-lg text-white">{n.title}</h4>
                 <p className="mt-2 text-gray-300 text-sm">{n.excerpt}</p>
-                
+
               </article>
             ))}
           </div>
