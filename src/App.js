@@ -7,7 +7,7 @@ import { useSwipeable } from "react-swipeable"; // 🔥 adicionado
 const pilotsSample = [
   {
     id: 1,
-    name: "Pastrano, Vander",
+    name: "Vander Pastrano",
     number: 12,
     category: "Júnior",
     country: "Venezuela",
@@ -19,7 +19,7 @@ const pilotsSample = [
   },
   {
     id: 2,
-    name: "Bressiani, Bruno",
+    name: "Bruno Bressiani",
     number: 7,
     category: "Sênior",
     country: "Brasil",
@@ -31,7 +31,7 @@ const pilotsSample = [
   },
   {
     id: 3,
-    name: "De Souza, Isaque",
+    name: "Isaque De Souza",
     number: 21,
     category: "Júnior",
     country: "Brasil",
@@ -43,7 +43,7 @@ const pilotsSample = [
   },
   {
     id: 4,
-    name: "Bruno, Giovani",
+    name: "Giovani Bruno",
     number: 9,
     category: "Júnior",
     country: "Brasil",
@@ -55,7 +55,7 @@ const pilotsSample = [
   },
   {
     id: 5,
-    name: "Felipe, Luiz",
+    name: "Luiz Felipe",
     number: 15,
     category: "Júnior",
     country: "Brasil",
@@ -67,7 +67,7 @@ const pilotsSample = [
   },
   {
     id: 6,
-    name: "Fernandes, Isaac",
+    name: "Isaac Fernandes",
     number: 33,
     category: "Júnior",
     country: "Brasil",
@@ -79,7 +79,7 @@ const pilotsSample = [
   },
   {
     id: 7,
-    name: "Tiago",
+    name: "Tiago Leal",
     number: 99,
     category: "Rookie",
     country: "Brasil",
@@ -196,7 +196,6 @@ export default function App() {
       <header className="absolute top-0 left-0 w-full z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-center">
           <nav className="flex flex-wrap justify-center gap-3 sm:gap-6 text-white font-medium text-sm sm:text-base md:text-lg">
-            <a href="#home" className="hover:text-red-500 transition">Home</a>
             <a href="#pilots" className="hover:text-red-500 transition">Equipe</a>
             <a href="#agenda" className="hover:text-red-500 transition">Agenda</a>
             <a href="#gallery" className="hover:text-red-500 transition">Galeria</a>
@@ -211,8 +210,8 @@ export default function App() {
         className="relative h-[90vh] md:h-screen flex items-end justify-center bg-cover bg-center"
         style={{ backgroundImage: "url('/images/kongspeed-banner.png')" }}
       >
-        <div className="relative z-10 text-center text-white p-4 pb-12 md:pb-20">
-          <p className="text-lg md:text-2xl mb-4">Velocidade, Força e Paixão pelas pistas</p>
+        <div className="relative z-10 text-center text-white p-4 pb-12 md:pb-50">
+          <p className="text-lg md:text-2xl mb-4">Mais que pilotos, somos família nas pistas.</p>
           <a
             href="#pilots"
             className="inline-block px-5 py-2 md:px-6 md:py-3 bg-red-600 hover:bg-red-700 rounded-full text-base md:text-lg font-semibold transition"
@@ -320,7 +319,113 @@ export default function App() {
         </div>
       </section>
 
-      
+      {/* Divider estilo pista com profundidade */}
+<div className="relative w-full h-24 overflow-hidden">
+  <svg
+    className="absolute inset-0 w-full h-full"
+    xmlns="http://www.w3.org/2000/svg"
+    preserveAspectRatio="none"
+    viewBox="0 0 100 20"
+  >
+    <defs>
+      {/* Asfalto com gradiente de profundidade */}
+      <linearGradient id="road" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stopColor="#1f1f1f" />
+        <stop offset="100%" stopColor="#000" />
+      </linearGradient>
+
+      {/* Faixa zebra */}
+      <pattern
+        id="zebra"
+        patternUnits="userSpaceOnUse"
+        width="10"
+        height="20"
+        patternTransform="rotate(45)"
+      >
+        <rect width="5" height="20" fill="white" />
+        <rect x="5" width="5" height="20" fill="black" />
+      </pattern>
+    </defs>
+
+    {/* Asfalto */}
+    <rect width="100%" height="100%" fill="url(#road)" />
+
+    {/* Faixa zebrada */}
+    <rect width="100%" height="100%" fill="url(#zebra)" fillOpacity="0.2" />
+
+    {/* Borda com sombra para dar profundidade */}
+    <rect
+      y="18"
+      width="100%"
+      height="2"
+      fill="black"
+      opacity="0.6"
+    />
+  </svg>
+</div>
+
+
+{/* CLASSIFICAÇÃO */}
+<section id="ranking" className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+  <motion.div
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+    viewport={{ once: true }}
+    className="bg-gradient-to-br from-gray-900 to-black rounded-xl shadow-lg p-4 sm:p-6 border border-gray-800"
+  >
+    <h3 className="text-2xl sm:text-3xl font-bold text-center">Classificação 2025</h3>
+    <p className="text-gray-400 mt-1 text-center text-sm sm:text-base">
+      Pontuação oficial da temporada.
+    </p>
+
+    <div className="mt-6 overflow-x-auto">
+      <table className="w-full border-separate border-spacing-y-2 min-w-[320px]">
+        <thead>
+          <tr className="text-left text-gray-400 text-xs sm:text-sm">
+            <th className="px-3 sm:px-4 py-2">Posição</th>
+            <th className="px-3 sm:px-4 py-2">Piloto</th>
+            <th className="px-3 sm:px-4 py-2 hidden sm:table-cell">País</th>
+            <th className="px-3 sm:px-4 py-2 text-right">Pontos</th>
+          </tr>
+        </thead>
+        <tbody>
+          {pilotsSample.map((p, index) => (
+            <motion.tr
+              key={p.id}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: index * 0.1 }}
+              className="bg-gray-800/40 hover:bg-gray-800/70 transition rounded-lg text-sm sm:text-base"
+            >
+              <td className="px-3 sm:px-4 py-3 font-bold text-gray-200">{index + 1}º</td>
+              <td className="px-3 sm:px-4 py-3 font-medium">{p.name}</td>
+              <td className="px-3 sm:px-4 py-3 hidden sm:table-cell">
+                <div className="flex items-center gap-2 text-xs sm:text-sm">
+                  <img
+                    src={`https://flagcdn.com/w20/${p.countryCode}.png`}
+                    alt={p.country}
+                    className="w-5 h-4 object-cover rounded-sm shadow-sm"
+                  />
+                  {p.country}
+                </div>
+              </td>
+              <td className="px-3 sm:px-4 py-3 text-right font-semibold text-yellow-400">0</td>
+              <td className="px-3 sm:px-4 py-3 text-center">
+                
+              </td>
+            </motion.tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </motion.div>
+</section>
+
+
+
+
+
 {/* AGENDA */}
 <section id="agenda" className="relative bg-gradient-to-b from-black via-gray-900/80 to-transparent py-12">
   <div className="max-w-7xl mx-auto px-6 relative z-10">
@@ -419,42 +524,116 @@ export default function App() {
 
 
       {/* GALLERY */}
-      <section id="gallery" className="max-w-7xl mx-auto px-6 py-12">
-        <h3 className="text-3xl font-bold">Galeria</h3>
-        <p className="text-gray-300 mt-2">Fotos e vídeos épicos da equipe.</p>
+<section id="gallery" className="max-w-7xl mx-auto px-4 sm:px-6 py-12">
+  <h3 className="text-2xl sm:text-3xl font-bold text-center">Galeria</h3>
+  <p className="text-gray-300 mt-2 text-center">Fotos e vídeos épicos da equipe.</p>
 
-        <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {gallerySample.map((src, i) => (
-            <button key={i} onClick={() => setLightbox({ open: true, index: i })} className="overflow-hidden rounded-lg">
-              <img src={src} alt={`gallery-${i}`} className="w-full h-40 object-cover transform hover:scale-105 transition" />
-            </button>
-          ))}
+  <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    {gallerySample.map((src, i) => (
+      <button
+        key={i}
+        onClick={() => setLightbox({ open: true, index: i })}
+        className="relative group overflow-hidden rounded-xl shadow-md"
+      >
+        <img
+          src={src}
+          alt={`gallery-${i}`}
+          className="w-full h-48 sm:h-52 object-cover transform group-hover:scale-110 transition duration-500"
+        />
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 flex items-center justify-center transition">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-8 h-8 text-white"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 10l4.553-4.553a1 1 0 00-1.414-1.414L13.586 8.586M9 14l-4.553 4.553a1 1 0 001.414 1.414L10.414 15.414M15 10L9 14" />
+          </svg>
         </div>
+      </button>
+    ))}
+  </div>
 
-        {/* Lightbox */}
-        {lightbox.open && (
-          <div className="fixed inset-0 z-50 bg-black/80 flex items-center justify-center">
-            <button className="absolute top-6 right-6 text-gray-300" onClick={() => setLightbox({ open: false, index: 0 })}>Fechar</button>
-            <img src={gallerySample[lightbox.index]} alt="" className="max-w-4xl max-h-[80vh] object-contain" />
-          </div>
-        )}
-      </section>
+  {/* Lightbox */}
+  {lightbox.open && (
+    <div className="fixed inset-0 z-50 bg-black/90 flex flex-col items-center justify-center p-4">
+      {/* Fechar */}
+      <button
+        className="absolute top-6 right-6 text-gray-300 hover:text-white"
+        onClick={() => setLightbox({ open: false, index: 0 })}
+      >
+        ✕
+      </button>
 
-      {/* NEWS */}
-      <section id="news" className="py-12 bg-black/40">
-        <div className="max-w-7xl mx-auto px-6">
-          <h3 className="text-3xl font-bold">Notícias</h3>
-          <div className="mt-6 grid md:grid-cols-3 gap-6">
-            {newsSample.map((n) => (
-              <article key={n.id} className="p-4 bg-gray-900 rounded-lg">
-                <div className="text-sm text-gray-400">{formatDateVerbose(n.date)}</div>
-                <h4 className="mt-2 font-bold">{n.title}</h4>
-                <p className="mt-2 text-gray-300 text-sm">{n.excerpt}</p>
-              </article>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* Navegação esquerda */}
+      <button
+        className="absolute left-4 text-gray-300 hover:text-white text-3xl"
+        onClick={() =>
+          setLightbox((prev) => ({
+            ...prev,
+            index: (prev.index - 1 + gallerySample.length) % gallerySample.length,
+          }))
+        }
+      >
+        ‹
+      </button>
+
+      {/* Imagem central */}
+      <img
+        src={gallerySample[lightbox.index]}
+        alt=""
+        className="max-w-full max-h-[80vh] object-contain rounded-lg shadow-lg transition"
+      />
+
+      {/* Navegação direita */}
+      <button
+        className="absolute right-4 text-gray-300 hover:text-white text-3xl"
+        onClick={() =>
+          setLightbox((prev) => ({
+            ...prev,
+            index: (prev.index + 1) % gallerySample.length,
+          }))
+        }
+      >
+        ›
+      </button>
+    </div>
+  )}
+</section>
+
+
+{/* NEWS */}
+<section id="news" className="py-12 bg-black/40">
+  <div className="max-w-7xl mx-auto px-6">
+    <h3 className="text-3xl font-bold text-center">Notícias</h3>
+    <p className="text-gray-400 text-center mt-2">
+      Fique por dentro das últimas novidades da equipe.
+    </p>
+
+    <div className="mt-8 grid gap-6 md:grid-cols-3">
+      {newsSample.map((n, idx) => (
+        <article
+          key={n.id}
+          className={`bg-gray-900 rounded-xl p-4 shadow-md hover:shadow-lg transition ${
+            idx === 0 ? "md:col-span-2" : ""
+          }`}
+        >
+          <div className="text-xs text-gray-400">{formatDateVerbose(n.date)}</div>
+          <h4 className="mt-1 font-semibold text-lg text-white">{n.title}</h4>
+          <p className="mt-2 text-gray-300 text-sm">{n.excerpt}</p>
+          <button className="mt-3 text-xs text-yellow-400 hover:underline">
+            Ler mais →
+          </button>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+
+
 
       {/* CONTACT / SPONSORS */}
       <footer id="contact" className="max-w-7xl mx-auto px-6 py-12">
@@ -486,3 +665,4 @@ export default function App() {
     </div>
   );
 }
+
