@@ -198,30 +198,30 @@ export default function App() {
         </div>
       </header>
 
-{/* HERO */}
-<section
-  className="relative h-[90vh] md:h-screen flex flex-col items-center justify-end bg-cover bg-center"
-  style={{ backgroundImage: "url('/images/kongspeed-banner.png')" }}
->
-  <div className="relative z-10 text-center text-white p-4 pb-12 md:pb-16">
-   
-    <div className="flex items-center justify-center gap-4">
-      <a
-        href="#pilots"
-        className="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-base font-semibold transition transform hover:-translate-y-1 hover:shadow-lg"
+      {/* HERO */}
+      <section
+        className="relative h-[90vh] md:h-screen flex flex-col items-center justify-end bg-cover bg-center"
+        style={{ backgroundImage: "url('/images/kongspeed-banner.png')" }}
       >
-        Conheça os Pilotos
-      </a>
+        <div className="relative z-10 text-center text-white p-4 pb-12 md:pb-16">
 
-      <a
-        href="#agenda"
-        className="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-full text-base font-semibold transition transform hover:-translate-y-1 hover:shadow-lg"
-      >
-        Eventos
-      </a>
-    </div>
-  </div>
-</section>
+          <div className="flex items-center justify-center gap-4">
+            <a
+              href="#pilots"
+              className="inline-block px-4 py-2 bg-red-600 hover:bg-red-700 rounded-full text-base font-semibold transition transform hover:-translate-y-1 hover:shadow-lg"
+            >
+              Conheça os Pilotos
+            </a>
+
+            <a
+              href="#agenda"
+              className="inline-block px-4 py-2 bg-yellow-500 hover:bg-yellow-600 rounded-full text-base font-semibold transition transform hover:-translate-y-1 hover:shadow-lg"
+            >
+              Eventos
+            </a>
+          </div>
+        </div>
+      </section>
 
 
 
@@ -236,7 +236,7 @@ export default function App() {
             className="w-full h-full object-cover opacity-20"
           />
           {/* Overlay preto para escurecer */}
-          <div className="absolute inset-0 bg-black/50" />
+          <div className="absolute inset-0 bg-black/30" />
         </div>
 
 
