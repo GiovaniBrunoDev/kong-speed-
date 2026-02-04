@@ -7,6 +7,25 @@ function parseLocalDateTime(dateString) {
   return new Date(dateString);
 }
 
+function getDaysLabel(dateIso) {
+  if (!dateIso || dateIso === "A definir") return "Em breve";
+
+  const eventDate = new Date(dateIso);
+
+  if (isNaN(eventDate.getTime())) return "Em breve";
+
+  const now = new Date();
+
+  const diffMs = eventDate - now;
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+
+  if (diffDays < 0) return "Encerrado";
+  if (diffDays === 0) return "HOJE";
+  if (diffDays === 1) return "AMANHÃ";
+
+  return `${diffDays} dias`;
+}
+
 
 const pilotsSample = [
   {
@@ -152,19 +171,33 @@ const newsSample = [
 
 
 
-function formatDateVerbose(iso) {
-  const d = new Date(iso);
+function formatEventDateSmart(iso) {
+  const eventDate = new Date(iso);
+  const now = new Date();
 
-  return d.toLocaleDateString("pt-BR", {
-    day: "2-digit",
-    month: "long",
-    year: "numeric"
-  }) + " • " +
-  d.toLocaleTimeString("pt-BR", {
+  const isSameDay =
+    eventDate.getDate() === now.getDate() &&
+    eventDate.getMonth() === now.getMonth() &&
+    eventDate.getFullYear() === now.getFullYear();
+
+  const time = eventDate.toLocaleTimeString("pt-BR", {
     hour: "2-digit",
     minute: "2-digit"
   });
+
+  if (isSameDay) {
+    return `HOJE ÀS ${time}`;
+  }
+
+  const date = eventDate.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  });
+
+  return `${date} • ${time}`;
 }
+
 
 
 function daysUntil(iso) {
@@ -486,29 +519,16 @@ export default function App() {
                       <div>
                         <div className="font-semibold text-white">{ev.event}</div>
                         <div className="text-sm text-gray-400">
-                          {isDefined ? formatDateVerbose(ev.date) : "Data a definir"} • {ev.location}
+                          {isDefined ? formatEventDateSmart(ev.date) : "Data a definir"} • {ev.location}
                         </div>
                       </div>
 
                       <div className="flex flex-col items-end">
                         <div className="text-sm text-gray-300 font-medium">
-                          {isDefined ? `${daysUntil(ev.date)} dias` : "Em breve"}
+                          {getDaysLabel(ev.date)}
+
                         </div>
 
-                        {isDefined && (
-                          <a
-                            className="text-xs mt-1 underline text-blue-400 hover:text-blue-300"
-                            href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
-                              ev.event
-                            )}&dates=${ev.date.replace(/-/g, "")}/${ev.date.replace(/-/g, "")}&details=${encodeURIComponent(
-                              ev.event
-                            )}&location=${encodeURIComponent(ev.location)}`}
-                            target="_blank"
-                            rel="noreferrer"
-                          >
-                            Adicionar
-                          </a>
-                        )}
                       </div>
                     </li>
                   );
@@ -532,7 +552,7 @@ export default function App() {
                     </div>
 
                     <div className="mt-1 text-gray-500 text-sm">
-                      {formatDateVerbose(nextEvent.date)}
+                     {formatEventDateSmart(nextEvent.date)}
                     </div>
 
                     {/* TIMER */}
@@ -694,7 +714,7 @@ export default function App() {
                 {/* Conteúdo */}
                 <div className="p-4">
                   <div className="text-xs text-gray-400">
-                    {formatDateVerbose(n.date)}
+                    {formatEventDateSmart(n.date)}
                   </div>
 
                   <h4 className="mt-1 font-semibold text-lg text-white">
