@@ -203,13 +203,9 @@ function formatEventDateSmart(iso) {
 
 export default function App() {
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
-  const [setNow] = useState(new Date());
   const [current, setCurrent] = useState(0);
 
-  useEffect(() => {
-    const t = setInterval(() => setNow(new Date()), 60_000);
-    return () => clearInterval(t);
-  }, []);
+
 
   const nextEvent = calendarSample.reduce((acc, cur) => {
     return new Date(cur.date) > new Date() && (!acc || new Date(cur.date) < new Date(acc.date)) ? cur : acc;
