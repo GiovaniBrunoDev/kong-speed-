@@ -417,7 +417,7 @@ export default function App() {
           viewport={{ once: true }}
           className="bg-gradient-to-br from-gray-900 to-black rounded-xl shadow-lg p-4 sm:p-6 border border-gray-800"
         >
-          <h3 className="text-2xl sm:text-3xl font-bold text-center">Classificação 2025</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-center">Classificação 2026</h3>
           <p className="text-gray-400 mt-1 text-center text-sm sm:text-base">
             Pontuação oficial da temporada.
           </p>
