@@ -200,19 +200,10 @@ function formatEventDateSmart(iso) {
 
 
 
-function daysUntil(iso) {
-  const now = new Date();
-  const then = new Date(`${iso}T00:00:00`);
-
-  const diff = Math.max(0, then - now);
-  return Math.floor(diff / (1000 * 60 * 60 * 24));
-}
-
 
 export default function App() {
-  const [selectedPilot, setSelectedPilot] = useState(null);
   const [lightbox, setLightbox] = useState({ open: false, index: 0 });
-  const [now, setNow] = useState(new Date());
+  const [setNow] = useState(new Date());
   const [current, setCurrent] = useState(0);
 
   useEffect(() => {
@@ -234,7 +225,6 @@ export default function App() {
     );
   };
 
-  const duplicatedPilots = [...pilotsSample, ...pilotsSample];
 
 
   // 🔥 Suporte a swipe
