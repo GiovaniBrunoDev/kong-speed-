@@ -3,6 +3,10 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useSwipeable } from "react-swipeable"; // 🔥 adicionado
 
+function parseLocalDateTime(dateString) {
+  return new Date(dateString);
+}
+
 
 const pilotsSample = [
   {
@@ -95,11 +99,12 @@ const pilotsSample = [
 
 const calendarSample = [
   {
-    id: 1,
-    date: "A definir",
-    event: "Etapa 1 - Adrena Kart Kartódromo",
-    location: "Foz do Iguaçu"
-  },
+  id: "2026-02-08",
+  event: "Etapa 1 - Adrena Kart Kartódromo",
+  date: "2026-02-08T17:35:00",
+  location: "Adrena Kart – Foz do Iguaçu"
+},
+
   {
     id: 2,
     date: "A definir",
@@ -129,23 +134,47 @@ const gallerySample = [
 const newsSample = [
   {
     id: 1,
-    title: "Rumores indicam possível retorno à temporada 2025",
-    date: "2025-09-02",
-    excerpt: "Fontes próximas à equipe sugerem que negociações estão em andamento para um retorno ainda nesta temporada."
+    title: "Kong Speed confirma retorno as pistas em Foz do Iguaçu",
+    date: "2026-02-03",
+    image: "/images/6.png",
+
+    excerpt: [
+      "Após um período afastada das competições, a Kong Speed está oficialmente de volta às pistas.",
+
+      "O retorno acontece no dia 08/02, em uma corrida no Adrena Kart, em Foz do Iguaçu (PR). A equipe volta com foco total, ajustes feitos e muita vontade de acelerar forte já nesta primeira prova.",
+
+      "A expectativa é de uma corrida intensa, marcando o início de uma nova fase para o time na temporada.",
+
+      "O evento promete disputas acirradas e será um momento especial tanto para a equipe quanto para os apoiadores e fãs que acompanham a Kong Speed de perto."
+    ]
   }
 ];
 
+
+
 function formatDateVerbose(iso) {
   const d = new Date(iso);
-  return d.toLocaleDateString("pt-BR", { day: "2-digit", month: "long", year: "numeric" });
+
+  return d.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric"
+  }) + " • " +
+  d.toLocaleTimeString("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit"
+  });
 }
+
 
 function daysUntil(iso) {
   const now = new Date();
-  const then = new Date(iso);
+  const then = new Date(`${iso}T00:00:00`);
+
   const diff = Math.max(0, then - now);
   return Math.floor(diff / (1000 * 60 * 60 * 24));
 }
+
 
 export default function App() {
   const [selectedPilot, setSelectedPilot] = useState(null);
@@ -181,6 +210,40 @@ export default function App() {
     onSwipedRight: prev,
     trackMouse: true
   });
+
+  const [timeLeft, setTimeLeft] = useState(null);
+
+  useEffect(() => {
+    if (!nextEvent || nextEvent.date === "A definir") return;
+
+    const updateCountdown = () => {
+      const eventDate = parseLocalDateTime(nextEvent.date);
+
+      const now = new Date();
+
+      const diff = eventDate - now;
+
+      if (diff <= 0) {
+        setTimeLeft(null);
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+
+      const days = Math.floor(totalSeconds / 86400);
+      const hours = Math.floor((totalSeconds % 86400) / 3600);
+      const minutes = Math.floor((totalSeconds % 3600) / 60);
+      const seconds = totalSeconds % 60;
+
+      setTimeLeft({ days, hours, minutes, seconds });
+    };
+
+    updateCountdown();
+    const interval = setInterval(updateCountdown, 1000);
+
+    return () => clearInterval(interval);
+  }, [nextEvent]);
+
 
 
   return (
@@ -394,25 +457,27 @@ export default function App() {
           <p className="text-gray-400 mt-1">Calendário oficial de corridas e eventos da Kong Speed.</p>
 
           <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+
             {/* Próximos eventos */}
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-6 shadow-lg border border-gray-800 relative overflow-hidden">
               <h4 className="font-semibold text-xl text-white flex items-center gap-2">
                 🏁 Próximos eventos
               </h4>
 
-              {/* Banner da pista entre o título e a lista */}
+              {/* Banner */}
               <div className="relative mt-3 mb-4 rounded-lg overflow-hidden">
                 <img
                   src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/2d/7f/78/8e/pista-ao-ar-livre-com.jpg?w=1200&h=1200&s=1"
                   alt="Pista de Foz do Iguaçu"
                   className="w-full h-40 object-cover opacity-70"
                 />
-                {/* Gradiente mais forte para não brigar com o texto */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
               </div>
+
               <ul className="mt-5 space-y-4 relative z-10">
                 {calendarSample.map((ev) => {
                   const isDefined = ev.date !== "A definir";
+
                   return (
                     <li
                       key={ev.id}
@@ -429,15 +494,13 @@ export default function App() {
                         <div className="text-sm text-gray-300 font-medium">
                           {isDefined ? `${daysUntil(ev.date)} dias` : "Em breve"}
                         </div>
+
                         {isDefined && (
                           <a
                             className="text-xs mt-1 underline text-blue-400 hover:text-blue-300"
                             href={`https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(
                               ev.event
-                            )}&dates=${ev.date.replace(/-/g, "")}/${ev.date.replace(
-                              /-/g,
-                              ""
-                            )}&details=${encodeURIComponent(
+                            )}&dates=${ev.date.replace(/-/g, "")}/${ev.date.replace(/-/g, "")}&details=${encodeURIComponent(
                               ev.event
                             )}&location=${encodeURIComponent(ev.location)}`}
                             target="_blank"
@@ -451,37 +514,71 @@ export default function App() {
                   );
                 })}
               </ul>
-
             </div>
-
-
 
             {/* Contagem regressiva */}
             <div className="bg-gradient-to-br from-gray-900 to-black rounded-xl p-6 shadow-lg border border-gray-800">
+
               <h4 className="font-semibold text-xl text-white flex items-center gap-2">
-                ⏳ Contagem regressiva
+                ⏳ Próxima corrida
               </h4>
-              <div className="mt-6 text-gray-300">
+
+              <div className="mt-6 text-center">
+
                 {nextEvent ? (
-                  <div className="text-center">
-                    <div className="text-sm uppercase tracking-wide">Próxima corrida</div>
-                    <div className="font-bold text-2xl text-yellow-400">{nextEvent.event}</div>
-                    <div className="mt-2 text-gray-400">
-                      {nextEvent.date !== "A definir" ? formatDateVerbose(nextEvent.date) : "Data a definir"}
+                  <>
+                    <div className="text-sm uppercase tracking-widest text-gray-400">
+                      {nextEvent.event}
                     </div>
-                    <div className="mt-4 text-4xl font-extrabold text-green-400">
-                      {nextEvent.date !== "A definir" ? `${daysUntil(nextEvent.date)} dias` : "Em breve"}
+
+                    <div className="mt-1 text-gray-500 text-sm">
+                      {formatDateVerbose(nextEvent.date)}
                     </div>
-                  </div>
+
+                    {/* TIMER */}
+                    {timeLeft ? (
+                      <div className="grid grid-cols-4 gap-3 mt-6">
+
+                        {[
+                          { label: "Dias", value: timeLeft.days },
+                          { label: "Horas", value: timeLeft.hours },
+                          { label: "Min", value: timeLeft.minutes },
+                          { label: "Seg", value: timeLeft.seconds },
+                        ].map((item) => (
+                          <div
+                            key={item.label}
+                            className="bg-gray-800/60 rounded-lg py-4 backdrop-blur-sm border border-gray-700"
+                          >
+                            <div className="text-3xl font-bold text-green-400">
+                              {String(item.value).padStart(2, "0")}
+                            </div>
+
+                            <div className="text-xs uppercase text-gray-400 mt-1">
+                              {item.label}
+                            </div>
+                          </div>
+                        ))}
+
+                      </div>
+                    ) : (
+                      <div className="mt-6 text-green-400 font-semibold">
+                        Evento em andamento ou finalizado
+                      </div>
+                    )}
+                  </>
                 ) : (
-                  <div className="text-center text-gray-500">Nenhum evento agendado.</div>
+                  <div className="text-gray-500">
+                    Nenhum evento agendado.
+                  </div>
                 )}
+
               </div>
             </div>
+
+
           </div>
         </div>
       </section>
-
 
 
       {/* GALLERY */}
@@ -577,18 +674,48 @@ export default function App() {
             {newsSample.map((n, idx) => (
               <article
                 key={n.id}
-                className={`bg-gray-900 rounded-xl p-4 shadow-md hover:shadow-lg transition ${idx === 0 ? "md:col-span-2" : ""
+                className={`bg-gray-900 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition ${idx === 0 ? "md:col-span-2" : ""
                   }`}
               >
-                <div className="text-xs text-gray-400">{formatDateVerbose(n.date)}</div>
-                <h4 className="mt-1 font-semibold text-lg text-white">{n.title}</h4>
-                <p className="mt-2 text-gray-300 text-sm">{n.excerpt}</p>
+                {/* CAPA */}
+                {n.image && (
+                  <div className="relative h-48 overflow-hidden">
+                    <img
+                      src={n.image}
+                      alt={n.title}
+                      className="w-full h-full object-cover hover:scale-105 transition duration-500"
+                    />
 
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+                  </div>
+                )}
+
+                {/* Conteúdo */}
+                <div className="p-4">
+                  <div className="text-xs text-gray-400">
+                    {formatDateVerbose(n.date)}
+                  </div>
+
+                  <h4 className="mt-1 font-semibold text-lg text-white">
+                    {n.title}
+                  </h4>
+
+                  <div className="mt-2 space-y-3">
+                    {n.excerpt.map((paragraph, i) => (
+                      <p key={i} className="text-gray-300 text-sm leading-relaxed">
+                        {paragraph}
+                      </p>
+                    ))}
+                  </div>
+                </div>
               </article>
             ))}
           </div>
         </div>
       </section>
+
+
 
 
 
